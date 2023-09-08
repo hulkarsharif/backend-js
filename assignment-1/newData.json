@@ -1,1 +1,185 @@
-[1,2,3,4,5]
+{
+    "january": {
+        "food": {
+            "max": { "id": 1, "amount": 300 },
+            "min": { "id": 1, "amount": 300 }
+        },
+        "rent": {
+            "max": { "id": 1, "amount": 1000 },
+            "min": { "amount": 950 }
+        },
+        "entertainment": {
+            "max": { "amount": 220 },
+            "min": { "id": 1, "amount": 200 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 200 },
+            "min": { "amount": 180 }
+        }
+    },
+    "february": {
+        "food": { "max": { "id": 1, "amount": 350 }, "min": { "amount": 320 } },
+        "rent": {
+            "max": { "id": 1, "amount": 1050 },
+            "min": { "amount": 1000 }
+        },
+        "entertainment": {
+            "max": { "amount": 240 },
+            "min": { "id": 1, "amount": 180 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 210 },
+            "min": { "amount": 200 }
+        }
+    },
+    "march": {
+        "food": { "max": { "amount": 340 }, "min": { "id": 1, "amount": 320 } },
+        "rent": {
+            "max": { "amount": 1050 },
+            "min": { "id": 1, "amount": 1000 }
+        },
+        "entertainment": {
+            "max": { "id": 1, "amount": 220 },
+            "min": { "amount": 210 }
+        },
+        "transportation": {
+            "max": { "amount": 220 },
+            "min": { "id": 1, "amount": 180 }
+        }
+    },
+    "april": {
+        "food": { "max": { "amount": 310 }, "min": { "id": 1, "amount": 280 } },
+        "rent": {
+            "max": { "id": 1, "amount": 900 },
+            "min": { "id": 1, "amount": 900 }
+        },
+        "entertainment": {
+            "max": { "amount": 230 },
+            "min": { "id": 1, "amount": 190 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 220 },
+            "min": { "amount": 190 }
+        }
+    },
+    "may": {
+        "food": { "max": { "amount": 330 }, "min": { "id": 1, "amount": 290 } },
+        "rent": {
+            "max": { "id": 1, "amount": 950 },
+            "min": { "id": 1, "amount": 950 }
+        },
+        "entertainment": {
+            "max": { "amount": 250 },
+            "min": { "id": 1, "amount": 210 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 180 },
+            "min": { "id": 1, "amount": 180 }
+        }
+    },
+    "june": {
+        "food": { "max": { "amount": 350 }, "min": { "id": 1, "amount": 320 } },
+        "rent": {
+            "max": { "id": 1, "amount": 980 },
+            "min": { "id": 1, "amount": 980 }
+        },
+        "entertainment": {
+            "max": { "amount": 230 },
+            "min": { "id": 1, "amount": 180 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 200 },
+            "min": { "id": 1, "amount": 200 }
+        }
+    },
+    "july": {
+        "food": { "max": { "amount": 340 }, "min": { "id": 1, "amount": 310 } },
+        "rent": {
+            "max": { "id": 1, "amount": 1050 },
+            "min": { "id": 1, "amount": 1050 }
+        },
+        "entertainment": {
+            "max": { "id": 1, "amount": 220 },
+            "min": { "amount": 210 }
+        },
+        "transportation": {
+            "max": { "amount": 210 },
+            "min": { "id": 1, "amount": 190 }
+        }
+    },
+    "august": {
+        "food": { "max": { "amount": 360 }, "min": { "id": 1, "amount": 330 } },
+        "rent": {
+            "max": { "id": 1, "amount": 1000 },
+            "min": { "id": 1, "amount": 1000 }
+        },
+        "entertainment": {
+            "max": { "amount": 240 },
+            "min": { "id": 1, "amount": 210 }
+        },
+        "transportation": {
+            "max": { "amount": 190 },
+            "min": { "id": 1, "amount": 180 }
+        }
+    },
+    "september": {
+        "food": { "max": { "amount": 330 }, "min": { "id": 1, "amount": 290 } },
+        "rent": {
+            "max": { "id": 1, "amount": 970 },
+            "min": { "id": 1, "amount": 970 }
+        },
+        "entertainment": {
+            "max": { "amount": 220 },
+            "min": { "id": 1, "amount": 190 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 230 },
+            "min": { "amount": 180 }
+        }
+    },
+    "october": {
+        "food": { "max": { "amount": 320 }, "min": { "id": 1, "amount": 280 } },
+        "rent": {
+            "max": { "id": 1, "amount": 950 },
+            "min": { "id": 1, "amount": 950 }
+        },
+        "entertainment": {
+            "max": { "amount": 240 },
+            "min": { "id": 1, "amount": 180 }
+        },
+        "transportation": {
+            "max": { "amount": 210 },
+            "min": { "id": 1, "amount": 200 }
+        }
+    },
+    "november": {
+        "food": { "max": { "amount": 340 }, "min": { "id": 1, "amount": 300 } },
+        "rent": {
+            "max": { "id": 1, "amount": 1000 },
+            "min": { "id": 1, "amount": 1000 }
+        },
+        "entertainment": {
+            "max": { "amount": 220 },
+            "min": { "id": 1, "amount": 200 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 250 },
+            "min": { "amount": 220 }
+        }
+    },
+    "december": {
+        "food": { "max": { "amount": 330 }, "min": { "id": 1, "amount": 320 } },
+        "rent": {
+            "max": { "id": 1, "amount": 980 },
+            "min": { "id": 1, "amount": 980 }
+        },
+        "entertainment": {
+            "max": { "amount": 260 },
+            "min": { "id": 1, "amount": 210 }
+        },
+        "transportation": {
+            "max": { "id": 1, "amount": 230 },
+            "min": { "id": 1, "amount": 230 }
+        }
+    }
+}
