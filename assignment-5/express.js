@@ -9,7 +9,7 @@ import {
 const app = express();
 app.use(express.json());
 
-const PORT = 4030;
+const PORT = 6060;
 
 app.use("/customers", customerRouter);
 app.use("/products", productRouter);

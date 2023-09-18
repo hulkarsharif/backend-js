@@ -4,7 +4,7 @@ import { validate, v4 as uuid } from "uuid";
 const API_KEY = "jkdfbgjh765478326578%%%***@@@@bsdhfbdhhvbdsfjh@##%%";
 
 class CustomerController {
-    getAllCustomers = (res, req) => {
+    getAllCustomers = (req, res) => {
         const { headers } = req;
         if (headers.authorization) {
             const apiKeyParts = headers.authorization.split(" ");
@@ -19,11 +19,34 @@ class CustomerController {
             res.status(400).json({
                 message: "API key is missing"
             });
-
             return;
         }
-        res.status(200).json({ data: customers });
+
+        res.status(200).json({
+            data: customers
+        });
     };
+
+    // getAllCustomers = (res, req) => {
+    // const { headers } = req;
+    // if (headers.authorization) {
+    //     const apiKeyParts = headers.authorization.split(" ");
+    //     if (apiKeyParts[0] !== "Bearer" || apiKeyParts[1] !== API_KEY) {
+    //         res.status(401).json({
+    //             message: "Not Valid API key"
+    //         });
+    //         return;
+    //     }
+    // } else {
+    //     res.status(400).json({
+    //         message: "API key is missing"
+    //     });
+    //     return;
+    // }
+    //     res.status(200).json({
+    //         data: customers
+    //     });
+    // };
 
     createCustomer = (req, res) => {
         const data = req.body;
@@ -118,7 +141,7 @@ class ProductController {
 
 //===================//
 class OrderController {
-    getAllOrder = (res) => {
+    getAllOrder = (req, res) => {
         res.status(200).json({ data: orders });
     };
 

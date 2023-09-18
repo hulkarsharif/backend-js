@@ -24,13 +24,8 @@ class MaintenanceController {
         res.status(200).json({ data: maintenance });
     };
     createMaintenance = (req, res) => {
-        const { carId, rentId } = req.body;
-        if (
-            !validate(carId) ||
-            !cars[carId] ||
-            Array.isArray(rentId) ||
-            rentId.some((rentId) => !validate(rentId) || !rentals[rentId])
-        ) {
+        const { carId, oilChange } = req.body;
+        if (!validate(carId) || !cars[carId] || Array.isArray(oilChange)) {
             return res
                 .status(400)
                 .json({ message: "Invalid customerId or productIds" });
@@ -39,7 +34,7 @@ class MaintenanceController {
         const maintenances = {
             id,
             carId,
-            rentId
+            oilChange
         };
         maintenance[id] = maintenances;
         res.status(201).json({ data: maintenances });

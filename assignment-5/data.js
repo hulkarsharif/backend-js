@@ -4,5 +4,3 @@ export const customers = {};
 export const products = {};
 
 export const orders = {};
-
-export const dummy = "hello";
