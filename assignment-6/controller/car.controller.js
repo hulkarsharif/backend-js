@@ -22,8 +22,8 @@ class CarController {
 
             return;
         }
-        const allCars = Object.values(cars);
-        res.status(200).json({ data: allCars });
+        const cars = Object.values(cars);
+        res.status(200).json({ data: cars });
     };
 
     createCars = (req, res) => {

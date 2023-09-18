@@ -13,7 +13,7 @@ const carRouter = Router();
 carRouter.get("/", carController, getAllCars);
 carRouter.get("/:carId", carController, getCarById);
 carRouter.post("/", carController, createCars);
-carRouter.get("/:carId", carController, updatedCar);
+carRouter.put("/:carId", carController, updatedCar);
 carRouter.delete("/:carId", carController, deleteCar);
 
 export { carRouter };

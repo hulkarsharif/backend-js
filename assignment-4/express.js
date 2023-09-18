@@ -22,7 +22,7 @@ app.post("/stories", (req, res) => {
 app.get("/stories/:storiesId", (req, res) => {
     const storyId = req.params.storyId;
     if (!validate(storyId) || !stories[storyId]) {
-        return res.status(400).json({ message: "Not a valid book ID" });
+        return res.status(400).json({ message: "Not a valid story ID" });
     }
     res.status(200).json({ data: stories[storyId] });
 });
@@ -31,7 +31,7 @@ app.put("/stories/:storiesId", (req, res) => {
     const storyId = req.params.storyId;
     const updatedData = req.body;
     if (!validate(storyId) || !stories[storyId]) {
-        return res.status(400).json({ message: "Not a valid book ID" });
+        return res.status(400).json({ message: "Not a valid story ID" });
     }
     stories[storyId] = { ...stories[storyId], ...updatedData };
     res.status(200).json({ data: stories[storyId] });
