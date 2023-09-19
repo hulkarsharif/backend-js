@@ -4,7 +4,7 @@ import { validate, v4 as uuid } from "uuid";
 const API_KEY = "jkdfbgjh765478326578$%^&^%^&$^%$%^$%^$";
 
 class CarController {
-    getAllCars = (res, req) => {
+    getAllCars = (req, res) => {
         const { headers } = req;
         if (headers.authorization) {
             const apiKeyParts = headers.authorization.split(" ");
@@ -19,11 +19,12 @@ class CarController {
             res.status(400).json({
                 message: "API key is missing"
             });
-
             return;
         }
-        const cars = Object.values(cars);
-        res.status(200).json({ data: cars });
+
+        res.status(200).json({
+            data: cars
+        });
     };
 
     createCars = (req, res) => {

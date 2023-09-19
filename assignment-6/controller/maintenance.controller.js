@@ -1,8 +1,10 @@
-import { maintenance } from "../data";
+import { cars, maintenance } from "../data";
 import { validate, v4 as uuid } from "uuid";
 
+const API_KEY = "jkdfbgjh765478326578%%%@@@@bsdhfbdhjbbhvbdsfjhgc";
+
 class MaintenanceController {
-    getAllMaintenance = (res, req) => {
+    getAllMaintenances = (req, res) => {
         const { headers } = req;
         if (headers.authorization) {
             const apiKeyParts = headers.authorization.split(" ");
@@ -17,24 +19,25 @@ class MaintenanceController {
             res.status(400).json({
                 message: "API key is missing"
             });
-
             return;
         }
-        const maintenance = Object.values(maintenance);
-        res.status(200).json({ data: maintenance });
+
+        res.status(200).json({
+            data: maintenance
+        });
     };
+
     createMaintenance = (req, res) => {
-        const { carId, oilChange } = req.body;
+        const { carId } = req.body;
         if (!validate(carId) || !cars[carId] || Array.isArray(oilChange)) {
             return res
                 .status(400)
                 .json({ message: "Invalid customerId or productIds" });
         }
-        const id = uuid;
+        const id = uuid();
         const maintenances = {
             id,
-            carId,
-            oilChange
+            ...data
         };
         maintenance[id] = maintenances;
         res.status(201).json({ data: maintenances });

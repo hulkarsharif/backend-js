@@ -24,16 +24,14 @@ class RentalController {
         res.status(200).json({ data: rentals });
     };
     createRentals = (req, res) => {
-        const { carId, startDate, endDate } = req.body;
+        const { carId } = req.body;
         if (!validate(carId) || !cars[carId]) {
             return res.status(400).json({ message: "Not a valid car ID" });
         }
         const id = uuid();
         const rent = {
             id,
-            carId,
-            startDate,
-            endDate
+            ...data
         };
         rentals[id] = rent;
         if (!rentals[rent.rentId]) {
