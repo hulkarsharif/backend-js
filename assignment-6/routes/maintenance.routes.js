@@ -1,31 +1,22 @@
 import { Router } from "express";
-import {
-    getAllMaintenance,
-    createMaintenance,
-    getMaintenanceById,
-    updatedMaintenance,
-    deleteMaintenance
-} from "../controller/maintenance.controller.js";
+
 import { maintenanceController } from "../controller/maintenance.controller.js";
 
 const maintenanceRouter = Router();
 
-maintenanceRouter.get("/", maintenanceController, getAllMaintenance);
+maintenanceRouter.get("/", maintenanceController.getAllMaintenances);
 maintenanceRouter.get(
     "/:maintenanceId",
-    maintenanceController,
-    getMaintenanceById
+    maintenanceController.getMaintenanceById
 );
-maintenanceRouter.post("/", maintenanceController, createMaintenance);
+maintenanceRouter.post("/", maintenanceController.createMaintenance);
 maintenanceRouter.put(
     "/:maintenanceId",
-    maintenanceController,
-    updatedMaintenance
+    maintenanceController.updatedMaintenance
 );
 maintenanceRouter.delete(
     "/:maintenanceId",
-    maintenanceController,
-    deleteMaintenance
+    maintenanceController.deleteMaintenance
 );
 
 export { maintenanceRouter };

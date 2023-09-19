@@ -1,4 +1,4 @@
-import { cars, maintenance } from "../data";
+import { cars, maintenance } from "../data.js";
 import { validate, v4 as uuid } from "uuid";
 
 const API_KEY = "jkdfbgjh765478326578%%%@@@@bsdhfbdhjbbhvbdsfjhgc";
@@ -29,7 +29,7 @@ class MaintenanceController {
 
     createMaintenance = (req, res) => {
         const { carId } = req.body;
-        if (!validate(carId) || !cars[carId] || Array.isArray(oilChange)) {
+        if (!validate(carId) || !cars[carId]) {
             return res
                 .status(400)
                 .json({ message: "Invalid customerId or productIds" });

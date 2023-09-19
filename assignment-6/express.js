@@ -6,7 +6,7 @@ import { maintenanceRouter } from "./routes/maintenance.routes.js";
 const app = express();
 app.use(express.json());
 
-const PORT = 4000;
+const PORT = 7077;
 
 app.use("/cars", carRouter);
 app.use("/rentals", rentalRouter);
