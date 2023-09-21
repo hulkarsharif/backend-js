@@ -1,6 +1,7 @@
 import { rentals } from "../data.js";
 import { validate, v4 as uuid } from "uuid";
 
+const API_KEY = "jkdfbgjh765478326578%%%@@?&^%$##";
 class RentalController {
     getAllRentals = (res, req) => {
         const { headers } = req;
@@ -17,11 +18,12 @@ class RentalController {
             res.status(400).json({
                 message: "API key is missing"
             });
-
             return;
         }
-        const rentals = Object.values(rentals);
-        res.status(200).json({ data: rentals });
+
+        res.status(200).json({
+            data: rentals
+        });
     };
     createRentals = (req, res) => {
         const { carId } = req.body;
