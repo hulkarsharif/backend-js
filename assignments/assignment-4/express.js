@@ -1,5 +1,5 @@
 import express from "express";
-import { stories } from "./data.js";
+// import { stories } from "./data.js";
 import { validate, v4 as uuid } from "uuid";
 
 const app = express();
@@ -7,98 +7,114 @@ app.use(express.json());
 
 const port = 4040;
 
-const newId = uuid();
-const subId = uuid();
+const stories = {};
 
-app.get("/stories", (res) => {
-    res.status(200).json({ data: filteredBooks });
+app.get("/stories", (req, res) => {
+    res.json(stories);
 });
 
 app.post("/stories", (req, res) => {
-    const newStory = req.body;
-    stories[newId] = newStory;
-    res.status(201).json({ data: newStory });
+    const id = uuid();
+    const { name, description, status } = req.body;
+    stories[id] = { id, name, description, status, tasks: {} };
+    res.status(201).json(stories[id]);
 });
-app.get("/stories/:storiesId", (req, res) => {
-    const storyId = req.params.storyId;
-    if (!validate(storyId) || !stories[storyId]) {
-        return res.status(400).json({ message: "Not a valid story ID" });
+app.get("/stories/:id", (req, res) => {
+    const { id } = req.params;
+    if (!validate(id) || !stories[id]) {
+        return res.status(400).json({ message: "Not a Story not found" });
     }
-    res.status(200).json({ data: stories[storyId] });
-});
-
-app.put("/stories/:storiesId", (req, res) => {
-    const storyId = req.params.storyId;
-    const updatedData = req.body;
-    if (!validate(storyId) || !stories[storyId]) {
-        return res.status(400).json({ message: "Not a valid story ID" });
-    }
-    stories[storyId] = { ...stories[storyId], ...updatedData };
-    res.status(200).json({ data: stories[storyId] });
+    res.json(stories[id]);
 });
 
-app.get("stories/subtasks", (res) => {
-    const allSubTasks = {};
-
-    for (const storyId in stories) {
-        const story = stories[storyId];
-
-        const tasksObj = story.tasks;
-
-        for (const taskId in tasksObj) {
-            const task = tasksObj[taskId];
-
-            allSubTasks[newId] = task;
-        }
+app.put("/stories/:id", (req, res) => {
+    const { id } = req.params;
+    if (!validate(id) || !stories[id]) {
+        return res.status(404).json({ message: "Story not found" });
     }
-    res.status(200).json({ data: allSubTasks });
+    const { name, description, status } = req.body;
+    stories[id] = { ...stories[id], name, description, status };
+    res.json(stories[id]);
+});
+// DELETE /stories/:id: Delete a specific story by ID
+app.delete("/stories/:id", (req, res) => {
+    const { id } = req.params;
+    if (!validate(id) || !stories[id]) {
+        return res.status(404).json({ message: "Story not found" });
+    }
+    delete stories[id];
+    res.status(204).send();
 });
 
-app.post("stories/subtasks", (req, res) => {
-    for (const storyId in stories) {
-        const story = stories[storyId];
-        const tasksObj = story.tasks;
-        const newSubTask = req.body;
-        tasksObj[subId] = newSubTask;
+// GET /stories/:id/tasks: Retrieve all sub-tasks for a specific story
+app.get("/stories/:id/tasks", (req, res) => {
+    const { id } = req.params;
+    if (!validate(id) || !stories[id]) {
+        return res.status(404).json({ message: "Story not found" });
     }
-    res.status(200).json({ data: newSubTask });
+    res.json(stories[id].tasks);
 });
 
-app.put("/stories/subtasks/:storiesId", (req, res) => {
-    for (const storyId in stories) {
-        const story = stories[storyId];
-        const tasksObj = story.tasks;
-        const subtaskId = req.params.subtaskId;
-        const updatedData = req.body;
-        if (tasksObj[subtaskId]) {
-            tasksObj[subtaskId].status = updatedData;
-        }
-
-        res.status(200).json({ data: stories[storyId] });
+app.post("/stories/:id/tasks", (req, res) => {
+    const { id } = req.params;
+    if (!validate(id) || !stories[id]) {
+        return res.status(404).json({ message: "Story not found" });
     }
+    const taskId = uuid();
+    const { name, description, status } = req.body;
+    stories[id].tasks[taskId] = { id: taskId, name, description, status };
+    res.status(201).json(stories[id].tasks[taskId]);
+});
+// GET /stories/:id/tasks/:taskId: Retrieve a specific sub-task by ID within a specific story
+app.get("/stories/:id/tasks/:taskId", (req, res) => {
+    const { id, taskId } = req.params;
+    if (
+        !validate(id) ||
+        !stories[id] ||
+        !validate(taskId) ||
+        !stories[id].tasks[taskId]
+    ) {
+        return res.status(404).json({ message: "Sub-Task not found" });
+    }
+    res.json(stories[id].tasks[taskId]);
 });
 
-app.get("/stories/subtasks/:storiesId", (req, res) => {
-    for (const storyId in stories) {
-        const story = stories[storyId];
-        const tasksObj = story.tasks;
-        const subtaskId = req.params.subtaskId;
-        const subtasks = tasksObj[subtaskId];
-
-        res.status(200).json({ data: subtasks });
+// PUT /stories/:id/tasks/:taskId: Update a specific sub-task by ID within a specific story
+app.put("/stories/:id/tasks/:taskId", (req, res) => {
+    const { id, taskId } = req.params;
+    if (
+        !validate(id) ||
+        !stories[id] ||
+        !validate(taskId) ||
+        !stories[id].tasks[taskId]
+    ) {
+        return res.status(404).json({ message: "Sub-Task not found" });
     }
+    const { name, description, status } = req.body;
+    stories[id].tasks[taskId] = {
+        ...stories[id].tasks[taskId],
+        name,
+        description,
+        status
+    };
+    res.json(stories[id].tasks[taskId]);
 });
-app.delete("/stories/subtasks/:subtasksId", (req, res) => {
-    for (const storyId in stories) {
-        const story = stories[storyId];
-        const tasksObj = story.tasks;
 
-        const subtaskId = req.params.subtasksId;
-        delete tasksObj[subtaskId];
-        res.status(204).send();
+// DELETE /stories/:id/tasks/:taskId: Delete a specific sub-task by ID within a specific story
+app.delete("/stories/:id/tasks/:taskId", (req, res) => {
+    const { id, taskId } = req.params;
+    if (
+        !validate(id) ||
+        !stories[id] ||
+        !validate(taskId) ||
+        !stories[id].tasks[taskId]
+    ) {
+        return res.status(404).json({ message: "Sub-Task not found" });
     }
+    delete stories[id].tasks[taskId];
+    res.status(204).send();
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on ${port}`);
+    console.log(`Server running at http://localhost:${port}/`);
 });
