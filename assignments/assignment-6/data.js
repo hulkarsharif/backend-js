@@ -1,4 +1,5 @@
 import { v4 as uuid } from "uuid";
+
 export const cars = {
     "550e8400-e29b-41d4-a716-446655440000": {
         id: "550e8400-e29b-41d4-a716-446655440000",
@@ -39,7 +40,7 @@ export const rentals = {
     // More rentals can be added here
 };
 
-export const maintenance = {
+export const maintenances = {
     "c2308f38-1c3a-4c6a-9f49-0c6d74f7820e": {
         id: "c2308f38-1c3a-4c6a-9f49-0c6d74f7820e",
         carId: "550e8400-e29b-41d4-a716-446655440000", // Reference to a car
