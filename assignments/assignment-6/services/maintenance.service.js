@@ -1,16 +1,16 @@
 import { maintenances } from "../data.js";
+import { v4 as uuid } from "uuid";
 
 class MaintenanceService {
     getAllMaintenances() {
-        let filteredMaintenances = Object.values(maintenances);
-        return filteredMaintenances;
+        return maintenances;
     }
 
     getMaintenanceById(maintenanceId) {
         return maintenances[maintenanceId];
     }
 
-    createAMaintenance(data) {
+    createMaintenance(data) {
         const id = uuid();
 
         const maintenance = {
@@ -22,9 +22,9 @@ class MaintenanceService {
     }
 
     updateMaintenance(maintenanceId, data) {
-        const maintenance = maintenances[maintenanceId];
+        const newMaintenance = maintenances[maintenanceId];
 
-        if (maintenance) {
+        if (newMaintenance) {
             maintenances[maintenanceId] = {
                 ...maintenances[maintenanceId],
                 ...data
@@ -36,7 +36,11 @@ class MaintenanceService {
     }
 
     deleteMaintenance(maintenanceId) {
-        delete maintenances[maintenanceId];
+        if (maintenances[maintenanceId]) {
+            delete maintenances[maintenanceId];
+            return;
+        }
+        return "Error";
     }
 }
 

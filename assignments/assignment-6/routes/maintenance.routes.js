@@ -11,7 +11,11 @@ maintenanceRouter.get(
     validationMiddleware.validateMaintenanceId,
     maintenanceController.getMaintenanceById
 );
-maintenanceRouter.post("/", maintenanceController.createMaintenance);
+maintenanceRouter.post(
+    "/",
+    // validationMiddleware.validateCarIdsInBody,
+    maintenanceController.createMaintenance
+);
 maintenanceRouter.put(
     "/:maintenanceId",
     validationMiddleware.validateMaintenanceId,

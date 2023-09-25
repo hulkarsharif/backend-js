@@ -1,16 +1,16 @@
 import { rentals } from "../data.js";
+import { v4 as uuid } from "uuid";
 
 class RentalService {
     getAllRentals() {
-        let filteredRentals = Object.values(rentals);
-        return filteredRentals;
+        return rentals;
     }
 
     getRentalById(rentalId) {
         return rentals[rentalId];
     }
 
-    createARental(data) {
+    createRental(data) {
         const id = uuid();
 
         const rental = {

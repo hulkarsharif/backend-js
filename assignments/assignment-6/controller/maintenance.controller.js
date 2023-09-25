@@ -4,8 +4,8 @@ import { MAINTENANCE_FIELDS } from "../const/allowedFields.js";
 
 class MaintenanceController {
     getAllMaintenances = (req, res) => {
-        const maintenance = maintenanceService.getAllMaintenances();
-        res.status(200).json({ data: maintenance });
+        const maintenances = maintenanceService.getAllMaintenances();
+        res.status(200).json({ data: maintenances });
     };
 
     getMaintenanceById = (req, res) => {
@@ -41,8 +41,8 @@ class MaintenanceController {
     };
 
     deleteMaintenance = (req, res) => {
-        const rentalId = req.params.rentalId;
-        const rental = rentalService.deleteRental(rentalId);
+        const maintenanceId = req.params.maintenanceId;
+        const maintenance = maintenanceService.deleteMaintenance(maintenanceId);
         res.status(204).send();
     };
 }

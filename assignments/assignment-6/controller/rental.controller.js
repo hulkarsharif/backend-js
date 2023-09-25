@@ -3,23 +3,25 @@ import { sanitizedObj } from "../utils/sanitizedObj.js";
 import { RENTAL_FIELDS } from "../const/allowedFields.js";
 
 class RentalController {
-    getAllRentals = (res, req) => {
-        const rental = rentalService.getAllRentals();
-        res.status(200).json({ data: rental });
+    getAllRentals = (req, res) => {
+        const rentals = rentalService.getAllRentals();
+        res.status(200).json({ data: rentals });
     };
 
     getRentalById = (req, res) => {
         const rentalId = req.params.rentalId;
-        const rental = rentalService.getAllRentals(rentalId);
+        const rental = rentalService.getRentalById(rentalId);
         res.status(200).json({ data: rental });
     };
-    createRentals = (req, res) => {
+
+    createRental = (req, res) => {
         const data = sanitizedObj(RENTAL_FIELDS, req.body);
 
-        const rental = rentalService.createARentals(data);
+        const rental = rentalService.createRental(data);
 
         res.status(201).json({ data: rental });
     };
+
     updateRental = (req, res) => {
         const rentalId = req.params.rentalId;
         const data = sanitizedObj(RENTAL_FIELDS, req.body);

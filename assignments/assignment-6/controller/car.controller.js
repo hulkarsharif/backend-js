@@ -6,22 +6,22 @@ const API_KEY = "jkdfbgjh765478326578$%^&^%^&$^%$%^$%^$";
 
 class CarController {
     getAllCars = (req, res) => {
-        const cars = carService.getCarById(carId);
-        if (headers.authorization) {
-            const apiKeyParts = headers.authorization.split(" ");
+        const cars = carService.getAllCars();
+        // if (headers.authorization) {
+        //     const apiKeyParts = headers.authorization.split(" ");
 
-            if (apiKeyParts[0] !== "Bearer" || apiKeyParts[1] !== API_KEY) {
-                res.status(401).json({
-                    message: "Not Valid API key"
-                });
-                return;
-            }
-        } else {
-            res.status(400).json({
-                message: "API key is missing"
-            });
-            return;
-        }
+        //     if (apiKeyParts[0] !== "Bearer" || apiKeyParts[1] !== API_KEY) {
+        //         res.status(401).json({
+        //             message: "Not Valid API key"
+        //         });
+        //         return;
+        //     }
+        // } else {
+        //     res.status(400).json({
+        //         message: "API key is missing"
+        //     });
+        //     return;
+        // }
 
         res.status(200).json({
             data: cars
@@ -30,7 +30,7 @@ class CarController {
 
     createCars = (req, res) => {
         const data = sanitizedObj(CAR_FIELDS, req.body);
-        const car = carService.getCarById(data);
+        const car = carService.createCars(data);
         res.status(200).json({ data: car });
     };
     getCarById = (req, res) => {

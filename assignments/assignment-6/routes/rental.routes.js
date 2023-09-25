@@ -11,7 +11,11 @@ rentalRouter.get(
     validationMiddleware.validateRentalId,
     rentalController.getRentalById
 );
-rentalRouter.post("/", rentalController.createRentals);
+rentalRouter.post(
+    "/",
+    // validationMiddleware.validateCarIdsInBody,
+    rentalController.createRental
+);
 rentalRouter.put(
     "/:rentalId",
     validationMiddleware.validateRentalId,

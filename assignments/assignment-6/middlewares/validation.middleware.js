@@ -9,6 +9,15 @@ class ValidationMiddleware {
         }
         res.status(400).json({ message: "Not a valid car ID" });
     };
+    validateCarIdsInBody = (req, res, next) => {
+        const { carId } = req.body;
+
+        if (validate(carId)) {
+            next();
+            return;
+        }
+        res.status(400).json({ message: "Not a valid car ID" });
+    };
     validateRentalId = (req, res, next) => {
         const { rentalId } = req.params;
 
@@ -19,9 +28,9 @@ class ValidationMiddleware {
         res.status(400).json({ message: "Not a valid rental ID" });
     };
     validateMaintenanceId = (req, res, next) => {
-        const { MaintenanceId } = req.params;
+        const { maintenanceId } = req.params;
 
-        if (validate(MaintenanceId)) {
+        if (validate(maintenanceId)) {
             next();
             return;
         }
