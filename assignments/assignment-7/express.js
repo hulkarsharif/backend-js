@@ -1,11 +1,13 @@
-import { promises as fs } from "fs";
-import { v4 as uuid } from "uuid";
+import { incomeRouter } from "./routes/income.routes.js";
+import express from "express";
 
 const app = express();
 app.use(express.json());
 
-app.use("/incomes", incomesRouter);
-app.use("/expenses", expensesRouter);
+const PORT = 4080;
+
+app.use("/incomes", incomeRouter);
+// app.use("/expenses", expensesRouter);
 
 app.listen(PORT, () => {
     console.log("Process is running on ", PORT);
