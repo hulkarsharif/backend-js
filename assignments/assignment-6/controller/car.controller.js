@@ -1,26 +1,27 @@
-import { cars } from "../data.js";
-import { validate, v4 as uuid } from "uuid";
+import { carService } from "../services/car.service.js";
+import { sanitizedObj } from "../utils/sanitizedObj.js";
+import { CAR_FIELDS } from "../const/allowedFields.js";
 
 const API_KEY = "jkdfbgjh765478326578$%^&^%^&$^%$%^$%^$";
 
 class CarController {
     getAllCars = (req, res) => {
-        const { headers } = req;
-        if (headers.authorization) {
-            const apiKeyParts = headers.authorization.split(" ");
+        const cars = carService.getAllCars();
+        // if (headers.authorization) {
+        //     const apiKeyParts = headers.authorization.split(" ");
 
-            if (apiKeyParts[0] !== "Bearer" || apiKeyParts[1] !== API_KEY) {
-                res.status(401).json({
-                    message: "Not Valid API key"
-                });
-                return;
-            }
-        } else {
-            res.status(400).json({
-                message: "API key is missing"
-            });
-            return;
-        }
+        //     if (apiKeyParts[0] !== "Bearer" || apiKeyParts[1] !== API_KEY) {
+        //         res.status(401).json({
+        //             message: "Not Valid API key"
+        //         });
+        //         return;
+        //     }
+        // } else {
+        //     res.status(400).json({
+        //         message: "API key is missing"
+        //     });
+        //     return;
+        // }
 
         res.status(200).json({
             data: cars
@@ -28,39 +29,33 @@ class CarController {
     };
 
     createCars = (req, res) => {
-        const data = req.body;
-        const id = uuid();
-        const car = {
-            id,
-            ...data
-        };
-        cars[id] = car;
-        res.status(201).json({ data: car });
+        const data = sanitizedObj(CAR_FIELDS, req.body);
+        const car = carService.createCars(data);
+        res.status(200).json({ data: car });
     };
     getCarById = (req, res) => {
         const carId = req.params.carId;
-        if (!validate(carId) || !cars[carId]) {
-            return res.status(400).json({ message: "Not a valid car ID" });
-        }
-        res.status(200).json({ data: cars[carId] });
+        const car = carService.getCarById(carId);
+        res.status(200).json({ data: car });
     };
 
     updatedCar = (req, res) => {
         const carId = req.params.carId;
-        const updatedData = req.body;
-        if (!validate(carId) || !cars[carId]) {
-            return res.status(400).json({ message: "Not a valid cars ID" });
+        const data = sanitizedObj(CAR_FIELDS, req.body);
+        const car = carService.getCarById(data);
+
+        if (car === "Error") {
+            res.status(404).json({
+                message: "Car with provided ID does not exist"
+            });
+            return;
         }
-        cars[carId] = { ...cars[carId], ...updatedData };
-        res.status(200).json({ data: cars[carId] });
+        res.status(200).json({ data: car });
     };
 
     deleteCar = (req, res) => {
         const carId = req.params.carId;
-        if (!validate(carId) || !cars[carId]) {
-            return res.status(400).json({ message: "Not a valid customer ID" });
-        }
-        delete cars[carId];
+        const car = carService.deleteCar(carId);
         res.status(204).send();
     };
 }

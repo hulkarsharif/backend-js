@@ -2,20 +2,28 @@ import { Router } from "express";
 
 import { maintenanceController } from "../controller/maintenance.controller.js";
 
-const maintenanceRouter = Router();
+import { validationMiddleware } from "../middlewares/validation.middleware.js";
 
+const maintenanceRouter = Router();
 maintenanceRouter.get("/", maintenanceController.getAllMaintenances);
 maintenanceRouter.get(
     "/:maintenanceId",
+    validationMiddleware.validateMaintenanceId,
     maintenanceController.getMaintenanceById
 );
-maintenanceRouter.post("/", maintenanceController.createMaintenance);
+maintenanceRouter.post(
+    "/",
+    // validationMiddleware.validateCarIdsInBody,
+    maintenanceController.createMaintenance
+);
 maintenanceRouter.put(
     "/:maintenanceId",
-    maintenanceController.updatedMaintenance
+    validationMiddleware.validateMaintenanceId,
+    maintenanceController.updateMaintenance
 );
 maintenanceRouter.delete(
     "/:maintenanceId",
+    validationMiddleware.validateMaintenanceId,
     maintenanceController.deleteMaintenance
 );
 

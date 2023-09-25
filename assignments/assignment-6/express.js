@@ -6,11 +6,11 @@ import { maintenanceRouter } from "./routes/maintenance.routes.js";
 const app = express();
 app.use(express.json());
 
-const PORT = 7066;
+const PORT = 7011;
 
 app.use("/cars", carRouter);
 app.use("/rentals", rentalRouter);
-app.use("/maintenance", maintenanceRouter);
+app.use("/maintenances", maintenanceRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
