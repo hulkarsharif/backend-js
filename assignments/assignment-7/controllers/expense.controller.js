@@ -1,11 +1,11 @@
 import { expensesService } from "../service/expense.service.js";
-import { sanitizedObj } from "../utils/sanitizedObj.js";
-import { EXPENSES_FIELDS } from "../const/allowfields.js";
+// import { sanitizedObj } from "../utils/sanitizedObj.js";
+// import { EXPENSES_FIELDS } from "../const/allowfields.js";
 
 class ExpensesController {
     getAllExpenses(req, res) {
         expensesService
-            .getAllExpensess()
+            .getAllExpenses()
             .then((parsedData) => {
                 res.status(200).json({ expenses: parsedData });
             })
