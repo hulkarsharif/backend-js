@@ -1,12 +1,25 @@
 import { Router } from "express";
-import { incomeController } from "../controllers/income.controller.js";
+import { incomesController } from "../controllers/income.controller.js";
+import { validationMiddleware } from "../middleware/middleware.js";
 
-const incomeRouter = new Router();
+const incomesRouter = new Router();
 
-incomeRouter.get("/", incomeController.getAllIncomes);
-incomeRouter.get("/:incomeId", incomeController.getIncomeById);
-incomeRouter.post("/", incomeController.createIncomes);
-incomeRouter.put("/:incomeId", incomeController.updateIncomeById);
-incomeRouter.delete("/:incomeId", incomeController.deleteIncomeById);
+incomesRouter.get("/", incomesController.getAllIncomes);
+incomesRouter.get(
+    "/:incomeId",
+    validationMiddleware.validateIncomeId,
+    incomesController.getIncomeById
+);
+incomesRouter.post("/", incomesController.createIncome);
+incomesRouter.put(
+    "/:incomeId",
+    validationMiddleware.validateIncomeId,
+    incomesController.updateIncomeById
+);
+incomesRouter.delete(
+    "/:incomeId",
+    validationMiddleware.validateIncomeId,
+    incomesController.deleteIncomeById
+);
 
-export { incomeRouter };
+export { incomesRouter };

@@ -1,11 +1,8 @@
-import { incomeService } from "../service/income.service.js";
-import fs from "fs";
-// import { sanitizedObj } from "../utils/sanitizedObj.js";
-// import { INCOMES_FIELDS } from "../const/allowfields.js";
+import { incomesService } from "../service/income.service.js";
 
-class IncomeController {
+class IncomesController {
     getAllIncomes(req, res) {
-        incomeService
+        incomesService
             .getAllIncomes()
             .then((parsedData) => {
                 res.status(200).json({ incomes: parsedData });
@@ -30,32 +27,36 @@ class IncomeController {
             });
         return income;
     }
-
-    createIncomes(req, res) {
-        incomeService
-            .createIncomes(req.body)
+    createIncome(req, res) {
+        incomesService
+            .createIncome(req.body)
             .then((newIncome) => {
                 res.status(201).json({ data: newIncome });
             })
             .catch((err) => {
-                res.status(500).json({ message: err });
+                res.status(500).json({
+                    message: err
+                });
             });
     }
     updateIncomeById(req, res) {
         const incomeId = req.params.incomeId;
-        const incomes = incomeService
+
+        const income = incomesService
             .updateIncomeById(incomeId, req.body)
             .then((updatedIncome) => {
                 res.status(200).json({ data: updatedIncome });
             })
             .catch((err) => {
-                res.status(500).json({ message: err });
+                res.status(500).json({
+                    message: err
+                });
             });
-        return incomes;
+        return income;
     }
     deleteIncomeById(req, res) {
         const incomeId = req.params.incomeId;
-        const income = incomeService
+        const income = incomesService
             .deleteIncomeById(incomeId)
             .then(() => {
                 res.status(204).send();
@@ -68,4 +69,5 @@ class IncomeController {
         return income;
     }
 }
-export const incomeController = new IncomeController();
+
+export const incomesController = new IncomesController();

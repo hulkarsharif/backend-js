@@ -12,11 +12,34 @@
             "amount": 5000,
             "date": "09/22/2023"
         },
-        "3f667d2b-22c7-4327-94a8-572e2086ff0d": {
+        "a95d48b6-bf74-4c60-95da-d78bc22dee5a": {
             "id": "a1b2c3d4-e5f6-7a8b-9c1d-2e3f4a5b6c7d",
             "source": "Salary",
             "amount": 4000,
             "date": "09/22/2023"
+        },
+        "fc04a182-6d84-4d3a-bc1e-5877396d2448": {
+            "id": "fc04a182-6d84-4d3a-bc1e-5877396d2448",
+            "incomes": {
+                "a1b2c3d4-e5f6-7a8b-9c1d-2e3f4a5b6c7d": {
+                    "id": "a1b2c3d4-e5f6-7a8b-9c1d-2e3f4a5b6c7d",
+                    "source": "income",
+                    "amount": 5000,
+                    "date": "09/22/2023"
+                },
+                "836a1b4c-02b8-450c-9810-8dc52b5d33a5": {
+                    "id": "a1b2c3d4-e5f6-7a8b-9c1d-2e3f4a5b6c7d",
+                    "source": "Salary",
+                    "amount": 5000,
+                    "date": "09/22/2023"
+                },
+                "3f667d2b-22c7-4327-94a8-572e2086ff0d": {
+                    "id": "a1b2c3d4-e5f6-7a8b-9c1d-2e3f4a5b6c7d",
+                    "source": "Salary",
+                    "amount": 4000,
+                    "date": "09/22/2023"
+                }
+            }
         }
     }
 }

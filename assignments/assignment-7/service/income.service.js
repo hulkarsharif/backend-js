@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 import fs from "fs";
 
-class IncomeService {
+class IncomesService {
     readFile() {
         const data = fs.promises.readFile("incomes.json", "utf-8");
         const dataObj = data.then((data) => {
@@ -10,56 +10,60 @@ class IncomeService {
         });
         return dataObj;
     }
-
     writeFile(data) {
         return fs.promises.writeFile("incomes.json", JSON.stringify(data));
     }
     getAllIncomes() {
         return this.readFile();
     }
+
     getIncomeById(incomeId) {
-        const income = this.readFile();
-        const result = income.then((data) => {
+        const incomes = this.readFile();
+        const result = incomes.then((data) => {
             return data[incomeId];
         });
         return result;
     }
-
-    createIncomes(data) {
+    createIncome(data) {
         const incomes = this.readFile();
-        return incomes.then((incomeObj) => {
+
+        return incomes.then((incomesObj) => {
             const id = uuid();
+
             const newIncome = {
                 id,
                 ...data
             };
-            incomeObj[id] = newIncome;
-            return this.writeFile({ incomes: incomeObj }).then(() => newIncome);
+
+            incomesObj[id] = newIncome;
+
+            return this.writeFile({ incomes: incomesObj }).then(
+                () => newIncome
+            );
         });
     }
     updateIncomeById(incomeId, data) {
-        const income = this.readFile();
-        return income.then((incomeObj) => {
-            if (incomeObj.hasProporty(incomeId)) {
-                const updateIncome = {
-                    ...incomeObj[incomeId],
+        const incomes = this.readFile();
+        return incomes.then((incomesObj) => {
+            if (incomesObj.hasOwnProperty(incomeId)) {
+                const updatedIncome = {
+                    ...incomesObj[incomeId],
                     ...data
                 };
-                incomeObj[incomeId] = updateIncome;
-                return this.writeFile({ income: incomeObj }).then(
-                    () => updateIncome
+                incomesObj[incomeId] = updatedIncome;
+                return this.writeFile({ incomes: incomesObj }).then(
+                    () => updatedIncome
                 );
             } else {
                 return "Error";
             }
         });
     }
-
     deleteIncomeById(incomeId) {
-        const income = this.readFile();
-        return income.then((incomeObj) => {
-            if (incomeObj.hasProporty(incomeId)) {
-                delete incomeObj[incomeId];
+        const incomes = this.readFile();
+        return incomes.then((incomesObj) => {
+            if (incomesObj.hasOwnProperty(incomeId)) {
+                delete incomesObj[incomeId];
                 return this.writeFile({ incomes: incomesObj }).then(() => {
                     return "An income was deleted";
                 });
@@ -69,4 +73,5 @@ class IncomeService {
         });
     }
 }
-export const incomeService = new IncomeService();
+
+export const incomesService = new IncomesService();
