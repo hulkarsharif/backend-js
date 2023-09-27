@@ -1,12 +1,37 @@
 {
     "posts": {
-        "uuid1": {
-            "id": "uuid1",
-            "title": "Understanding JavaScript",
-            "content": "JavaScript is a high-level, object-oriented programming language...",
-            "authorId": "authorUuid1",
-            "tagIds": ["tagUuid1", "tagUuid2"],
-            "createdDate": "09/22/2023"
+        "postObj": {
+            "uuid1": {
+                "id": "uuid1",
+                "title": "Understanding JavaScript",
+                "content": "JavaScript is a high-level, object-oriented programming language...",
+                "authorId": "authorUuid1",
+                "tagIds": ["tagUuid1", "tagUuid2"],
+                "createdDate": "09/22/2023"
+            },
+            "f24795cf-4c22-4ba4-95d0-f20066499cf8": {
+                "id": "f24795cf-4c22-4ba4-95d0-f20066499cf8",
+                "content": "JavaScript is a high-level, object-oriented programming language...",
+                "authorId": "authorUuid1",
+                "tagIds": ["tagUuid1", "tagUuid2"],
+                "createdDate": "09/22/2019",
+                "posts": {
+                    "id": {
+                        "title": "Understanding JavaScript",
+                        "content": "JavaScript is a high-level, object-oriented programming language data...",
+                        "authorId": "authorUuid1",
+                        "tagIds": ["tagUuid1", "tagUuid2"],
+                        "createdDate": "09/22/2023"
+                    }
+                }
+            },
+            "969d07e0-7eae-49a1-92fc-7f7d879d4d5d": {
+                "id": "969d07e0-7eae-49a1-92fc-7f7d879d4d5d",
+                "content": "JavaScript is a high-level, object-oriented programming language...",
+                "authorId": "authorUuid1",
+                "tagIds": ["tagUuid1", "tagUuid2"],
+                "createdDate": "09/22/2019"
+            }
         }
     }
 }
